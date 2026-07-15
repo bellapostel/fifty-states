@@ -24,7 +24,7 @@ mh_accept_per_smc <- ceiling(n_distinct(map_shd$shd_2020)/3) + 26
 
 plans <- redist_smc(
   map_shd,
-  nsims = 5000, runs = 5,
+  nsims = 5000, runs = 1,
   constraints = constr,
   ncores = 0,
   counties = pseudo_county,
@@ -50,29 +50,29 @@ cli_process_start("Saving {.cls redist_plans} object")
 # TODO add any reference plans that aren't already included
 
 # Output the redist_map object. Do not edit this path.
-write_rds(plans, here("data-out/NJ_2020/NJ_shd_2020_plans.rds"), compress = "xz")
+write_rds(plans, here("data-out/NJ_2020/NJ_shd_2020_plans_plan1.rds"), compress = "xz")
 cli_process_done()
 
 # Bella added below (uncomment when viewing validation)
 # plans <- readRDS("data-out/NJ_2020/NJ_shd_2020_plans.rds")
 
 # Compute summary statistics -----
-cli_process_start("Computing summary statistics for {.pkg NJ_shd_2020}")
+#cli_process_start("Computing summary statistics for {.pkg NJ_shd_2020}")
 
-plans <- add_summary_stats(plans, map_shd)
+#plans <- add_summary_stats(plans, map_shd)
 
 # Output the summary statistics. Do not edit this path.
-save_summary_stats(plans, "data-out/NJ_2020/NJ_shd_2020_stats.csv")
+#save_summary_stats(plans, "data-out/NJ_2020/NJ_shd_2020_stats.csv")
 
-cli_process_done()
+#cli_process_done()
 
-if (interactive()) {
-    library(ggplot2)
-    library(patchwork)
+#if (interactive()) {
+    #library(ggplot2)
+    #library(patchwork)
 
-    validate_analysis(plans, map_shd)
-    summary(plans)
+    #validate_analysis(plans, map_shd)
+    #summary(plans)
 
     # Extra validation plots for custom constraints -----
     # TODO remove this section if no custom constraints
-}
+#}
