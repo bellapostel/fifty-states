@@ -12,6 +12,19 @@ sd_shp <- sd_shp |>
 
 sd_shp$shd_2020_NEW <- vctrs::vec_group_id(sd_shp$shd_2020_NEW)
 
+sd_shp <- sd_shp |>
+  mutate(
+    merge_group = county %in% c(
+      "Bennett County",
+      "Jackson County"#,
+      #"Mellette County",
+      #"Oglala Lakota County"#,
+      #"Todd County"
+    )
+  )
+
+## ---------
+
 map_ssd <- redist_map(sd_shp, pop_tol = 0.05,
     existing_plan = ssd_2020, adj = sd_shp$adj)
 
@@ -20,23 +33,27 @@ map_shd <- redist_map(sd_shp, pop_tol = 0.05,
 
 # TODO any filtering, cores, merging, etc.
 
+map_ssd_merged <- map_ssd |>
+  merge_by(merge_group) |>
+  select(-merge_group)
+
 # BELLA Added the following total splits constraint
 constr <- redist_constr(map_shd)
 constr <- add_constr_total_splits(constr, strength = 2.4, admin = map_shd$county)
 
 # BELLA Added the following total splits constraint
-constr_ssd <- redist_constr(map_ssd)
-constr_ssd <- add_constr_total_splits(constr_ssd, strength = 2.4, admin = map_ssd$county)
-constr_ssd <- add_constr_grp_hinge(constr_ssd, strength = 2, group_pop = map_ssd$vap_aian,
-                                   total_pop = map_ssd$pop,tgts_group = c(0.5, 0.5))
-constr_ssd <- add_constr_grp_inv_hinge(constr_ssd, strength = 2, group_pop = map_ssd$vap_aian,
-                                   total_pop = map_ssd$pop,tgts_group = c(0.7, 0.5))
+constr_ssd <- redist_constr(map_ssd_merged)
+constr_ssd <- add_constr_total_splits(constr_ssd, strength = 2.4, admin = map_ssd_merged$county)
+constr_ssd <- add_constr_grp_hinge(constr_ssd, strength = 2, group_pop = map_ssd_merged$vap_aian,
+                                   total_pop = map_ssd_merged$pop,tgts_group = c(0.5, 0.5))
+constr_ssd <- add_constr_grp_inv_hinge(constr_ssd, strength = 2, group_pop = map_ssd_merged$vap_aian,
+                                   total_pop = map_ssd_merged$pop,tgts_group = c(0.7, 0.5))
 
 # TODO remove if not necessary. Adjust pop_muni as needed to balance county/muni splits
 # make pseudo counties with default settings
-map_ssd <- map_ssd |>
-    mutate(pseudo_county = pick_county_muni(map_ssd, counties = county, munis = muni,
-                                            pop_muni = get_target(map_ssd)))
+map_ssd_merged <- map_ssd_merged |>
+    mutate(pseudo_county = pick_county_muni(map_ssd_merged, counties = county, munis = muni,
+                                            pop_muni = get_target(map_ssd_merged)))
 map_shd <- map_shd |>
     mutate(pseudo_county = pick_county_muni(map_shd, counties = county, munis = muni,
                                             pop_muni = get_target(map_shd)))

@@ -20,11 +20,11 @@ cli_process_start("Running simulations for {.pkg SD_ssd_2020}")
 set.seed(2020)
 
 # TODO set equal to one third of number of districts, increase by 10-15 if no convergence
-mh_accept_per_smc <- ceiling(n_distinct(map_ssd$ssd_2020)/3) + 28
+mh_accept_per_smc <- ceiling(n_distinct(map_ssd_merged$ssd_2020)/3) #+ 28
 
 plans <- redist_smc(
-  map_ssd,
-  nsims = 5000, runs = 5,
+  map_ssd_merged,
+  nsims = 2000, runs = 1,
   constraints = constr_ssd,
   counties = pseudo_county,
   sampling_space = "linking_edge",
@@ -37,6 +37,7 @@ plans <- redist_smc(
 # make sure to call `pullback()` on this plans object!
 
 plans <- plans |>
+  pullback() |>
     group_by(chain) |>
     filter(as.integer(draw) < min(as.integer(draw)) + 2000) |> # thin samples
     ungroup()
