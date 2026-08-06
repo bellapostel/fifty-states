@@ -6,6 +6,20 @@ cli_process_start("Creating {.cls redist_map} object for {.pkg IL_leg_2020}")
 
 # TODO any pre-computation (usually not necessary)
 
+# Removing water precincts
+# Public waters: https://dnr.illinois.gov/waterresources/publicwaters.html
+# Plot to show where the removed precincts are
+# library(ggplot2)
+# ggplot() +
+# geom_sf(data = il_shp, fill = "grey90", color = "white", linewidth = 0.05) +
+# geom_sf(data = filter(il_shp, is.na(ssd_2020)), fill = "red",color = "black",
+# linewidth = 0.3)
+
+il_shp <- il_shp |>
+  filter(!is.na(muni))
+
+il_shp$ssd_2020 <- as.numeric(il_shp$ssd_2020 )
+
 map_ssd <- redist_map(il_shp, pop_tol = 0.05,
     existing_plan = ssd_2020, adj = il_shp$adj)
 
