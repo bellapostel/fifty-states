@@ -122,7 +122,7 @@ if (!file.exists(here(shp_path))) {
     # same state house and senate districts according to https://experience.arcgis.com/experience/7960b9bb3b6543699d364f9001692e81/page/County-of-Maui?views=State-House-Districts-only%2CState-House-Districts-only-%2CTool-Instructions---
 
     # Island connection #1 Lanai and Kahoolawe
-    hi_shp$adj <- add_edge(hi_shp$adj, 14718, 14730)
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 14718, 14730)
 
     # I needed to connect Molokai somehow so I unofficially looked up that the shortest
     # distance between Molokai and another Maui island was with the main Maui island
@@ -130,35 +130,34 @@ if (!file.exists(here(shp_path))) {
     # other
 
     # Island connection #2 Molokai and Maui
-    hi_shp$adj <- add_edge(hi_shp$adj, 14693, 14703)
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 14693, 14703)
 
     # BELLA Kauai island connections
     #Kaula to Niihau
-    hi_shp$adj <- add_edge(hi_shp$adj, 12683, 12684)
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 12683, 12684)
     #Niiahu to Kauai
-    hi_shp$adj <- add_edge(hi_shp$adj, 12676, 12683)
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 12676, 12683)
     #Niihau to Northwest island chain
-    hi_shp$adj <- add_edge(hi_shp$adj, 10966, 12683)
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10966, 12683)
     #Below are just all of the islands in the chain connected
-    hi_shp$adj <- add_edge(hi_shp$adj, 10966, 10968)
-    hi_shp$adj <- add_edge(hi_shp$adj, 10968, 10971)
-    hi_shp$adj <- add_edge(hi_shp$adj, 10971, 10988)
-    hi_shp$adj <- add_edge(hi_shp$adj, 10978, 10988)
-    hi_shp$adj <- add_edge(hi_shp$adj, 10978, 10979)
-    hi_shp$adj <- add_edge(hi_shp$adj, 10979, 10981)
-    hi_shp$adj <- add_edge(hi_shp$adj, 10981, 10984)
-    hi_shp$adj <- add_edge(hi_shp$adj, 10963, 10984)
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10966, 10968)
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10968, 10971)
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10978, 10988)
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10978, 10979)
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10979, 10981)
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10981, 10984)
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10963, 10984)
 
     # BELLA arbitrary island connections
 
     #Hawaii to Maui
-    hi_shp$adj <- add_edge(hi_shp$adj, 4161, 14712)
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 4161, 14712)
 
     #Molokai to Oahu
-    hi_shp$adj <- add_edge(hi_shp$adj, 11280, 14689)
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 11280, 14689)
 
     #Oahu to Kauai
-    hi_shp$adj <- add_edge(hi_shp$adj, 11249, 12664)
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 11249, 12664)
 
     #added island connections CONG FILE...
 
