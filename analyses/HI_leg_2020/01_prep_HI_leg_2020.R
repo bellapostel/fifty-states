@@ -148,6 +148,8 @@ if (!file.exists(here(shp_path))) {
     hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10981, 10984)
     hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10963, 10984)
 
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10971, 10988)
+
     # BELLA arbitrary island connections
 
     #Hawaii to Maui
