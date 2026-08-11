@@ -129,8 +129,15 @@ if (!file.exists(here(shp_path))) {
     # So I connected the precincts on the two islands that were visibly closest to each
     # other
 
-    # Island connection #2 Molokai and Maui
-    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 14693, 14703)
+    # Island connection #2 CHANGED BASED ON WHERE EXISTING STATE HOUSE DISTRICT 13 IS
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 14693, 14706)
+
+    #Maui island connection between Lanai and Molokai
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 14694, 14728)
+
+    #BELLA Hawaii island connection
+    # In order to fix connection components -- there was an isolated vtd encompassed within another
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 2569, 2522)
 
     # BELLA Kauai island connections
     #Kaula to Niihau
@@ -147,8 +154,12 @@ if (!file.exists(here(shp_path))) {
     hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10979, 10981)
     hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10981, 10984)
     hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10963, 10984)
-
+    #I think below is the one Chris said I forgot
     hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10971, 10988)
+
+    # For connected components -- CONNECTS the northwest islands to oahu actually so I am going to delete the arbitrary connection
+    # between Oahu and Kauai
+    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 10966, 11281)
 
     # BELLA arbitrary island connections
 
@@ -158,8 +169,10 @@ if (!file.exists(here(shp_path))) {
     #Molokai to Oahu
     hi_shp$adj <- geomander::add_edge(hi_shp$adj, 11280, 14689)
 
+    # REMOVED THE OAHU - KAUAI connection because for ccm reasons, i had to connect
+    # oahu to the northwest island chain
     #Oahu to Kauai
-    hi_shp$adj <- geomander::add_edge(hi_shp$adj, 11249, 12664)
+    #hi_shp$adj <- geomander::add_edge(hi_shp$adj, 11249, 12664)
 
     #added island connections CONG FILE...
 
