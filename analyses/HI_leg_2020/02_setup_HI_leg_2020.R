@@ -59,6 +59,8 @@ hawaii_shd <- hawaii_shd |>
 # Add an analysis name attribute
 attr(map_ssd, "analysis_name") <- "HI_SSD_2020"
 attr(map_shd, "analysis_name") <- "HI_SHD_2020"
+# Bella added
+attr(hawaii_shd, "analysis_name") <- "HI_HAWAII_SHD_2020"
 
 # BELLA edited the below output names to account for each island unit; replaced "map" with island unit
 # Output the redist_map object. Do not edit this path.

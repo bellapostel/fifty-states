@@ -27,7 +27,7 @@ plans <- redist_smc(
   # BELLA edited for each island unit
   hawaii_shd,
   nsims = 2000, runs = 5,
-  ncores = 0,
+  #ncores = 0,
   counties = pseudo_county,
   sampling_space = "linking_edge",
   ms_params = list(frequency = 1L, mh_accept_per_smc = mh_accept_per_smc),
@@ -57,21 +57,21 @@ cli_process_done()
 # Compute summary statistics -----
 cli_process_start("Computing summary statistics for {.pkg HI_shd_2020}")
 
-#plans <- add_summary_stats(plans, map_shd)
+plans <- add_summary_stats(plans, hawaii_shd)
 
 # TODO edited the below for each of the four basic island units
 # Output the summary statistics. Do not edit this path.
-#save_summary_stats(plans, "data-out/HI_2020/HI_shd_2020_stats_HAWAII.csv")
+save_summary_stats(plans, "data-out/HI_2020/HI_shd_2020_stats_HAWAII.csv")
 
-#cli_process_done()
+cli_process_done()
 
-#if (interactive()) {
+if (interactive()) {
     library(ggplot2)
     library(patchwork)
 
-    #validate_analysis(plans, map_shd)
+    validate_analysis(plans, hawaii_shd)
     summary(plans)
 
     # Extra validation plots for custom constraints -----
     # TODO remove this section if no custom constraints
-#}
+}
