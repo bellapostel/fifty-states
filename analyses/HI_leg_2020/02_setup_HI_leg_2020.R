@@ -44,6 +44,10 @@ kauai_shd <- map_shd |>
 kauai_ssd <- map_ssd |>
   filter(county == "Kauai County")
 
+# Added the following Polsby-Popper constraint
+constr <- redist_constr(hawaii_shd)
+constr <- add_constr_polsby(constr, strength = 10, perim_df = NULL)
+
 # TODO remove if not necessary. Adjust pop_muni as needed to balance county/muni splits
 # make pseudo counties with default settings
 # BELLA EDITED TO ACCOUNT FOR SUB MAPS; replaced "map" with name of island unit
@@ -52,7 +56,7 @@ hawaii_ssd <- hawaii_ssd |>
                                             pop_muni = get_target(hawaii_ssd)))
 hawaii_shd <- hawaii_shd |>
     mutate(pseudo_county = pick_county_muni(hawaii_shd, counties = county, munis = muni,
-                                            pop_muni = 3*get_target(hawaii_shd)))
+                                            pop_muni = get_target(hawaii_shd)))
 # IF MERGING CORES OR OTHER UNITS:
 # make a new `map_cores` object that is merged & used for simulating. You can set `drop_geom=TRUE` for this.
 

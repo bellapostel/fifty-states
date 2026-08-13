@@ -27,6 +27,7 @@ plans <- redist_smc(
   # BELLA edited for each island unit
   hawaii_shd,
   nsims = 2000, runs = 5,
+  constraints = constr,
   #ncores = 0,
   counties = pseudo_county,
   sampling_space = "linking_edge",
