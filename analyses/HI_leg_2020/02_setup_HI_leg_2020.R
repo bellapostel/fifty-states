@@ -20,8 +20,16 @@ map_shd <- redist_map(hi_shp, pop_tol = 0.05,
 hawaii_shd <- map_shd |>
   filter(county == "Hawaii County")
 
+# For HAWAII ssd, I changed pop_tol to 0.10 due to stalling out.
+# https://elections.hawaii.gov/wp-content/uploads/Addendum-01-Template-Plans.pdf?utm_source=chatgpt.com
+# See below page 7 for the pop deviations within each basic island unit
+# https://elections.hawaii.gov/wp-content/uploads/2021-Reapportionment-Commission-Final-Report-952-pages-February-25-2022.pdf
+# Meeting minutes: "Courts have upheld total deviation under 10 percent" Page 100
+# https://elections.hawaii.gov/wp-content/uploads/Meeting-Materials-20210826-v1.pdf
+
 hawaii_ssd <- map_ssd |>
-  filter(county == "Hawaii County")
+  filter(county == "Hawaii County") |>
+  #set_pop_tol(0.10) -- did not fix the stalling
 
 #OAHU
 oahu_shd <- map_shd |>
