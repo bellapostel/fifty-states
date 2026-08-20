@@ -55,6 +55,9 @@ cli_process_start("Saving {.cls redist_plans} object")
 write_rds(plans, here("data-out/HI_2020/HI_shd_2020_plans_OAHU.rds"), compress = "xz")
 cli_process_done()
 
+# The following line is uncommented when viewing validation plots
+plans <- readRDS("data-out/HI_2020/HI_shd_2020_plans_OAHU.rds")
+
 # Compute summary statistics -----
 cli_process_start("Computing summary statistics for {.pkg HI_shd_2020}")
 

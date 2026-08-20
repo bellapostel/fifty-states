@@ -191,6 +191,29 @@ if (!file.exists(here(shp_path))) {
 
    # hi_shp$adj <- hi_shp$adj %>% add_edge(islands$v1, islands$v2)
 
+    library(geomander)
+#Removing beach connections
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4161, 4162)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4162, 4163)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4163, 4164)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4164, 4165)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4165, 4166)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4145, 4166)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4145, 4146)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4146, 4147)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4147, 4148)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4148, 4149)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4149, 4151)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4151, 4152)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4152, 4154)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4153, 4154)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4153, 4155)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4156, 4157)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4157, 4158)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4158, 4159)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4159, 4160)
+    hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4160, 4161)
+
 
     # check max number of connected components
     # 1 is one fully connected component, more is worse
