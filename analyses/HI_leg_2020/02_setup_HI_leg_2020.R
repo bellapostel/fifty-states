@@ -52,12 +52,12 @@ constr <- add_constr_polsby(constr, strength = 10, perim_df = NULL)
 # make pseudo counties with default settings
 # BELLA EDITED TO ACCOUNT FOR SUB MAPS; replaced "map" with name of island unit
 # CHANGE for each island unit
-oahu_ssd <- oahu_ssd |>
-    mutate(pseudo_county = pick_county_muni(oahu_ssd, counties = county, munis = muni,
-                                            pop_muni = get_target(oahu_ssd)))
-oahu_shd <- oahu_shd |>
-    mutate(pseudo_county = pick_county_muni(oahu_shd, counties = county, munis = muni,
-                                            pop_muni = get_target(oahu_shd)))
+hawaii_ssd <- hawaii_ssd |>
+    mutate(pseudo_county = pick_county_muni(hawaii_ssd, counties = county, munis = muni,
+                                            pop_muni = get_target(hawaii_ssd)))
+hawaii_shd <- hawaii_shd |>
+    mutate(pseudo_county = pick_county_muni(hawaii_shd, counties = county, munis = muni,
+                                            pop_muni = get_target(hawaii_shd)))
 # IF MERGING CORES OR OTHER UNITS:
 # make a new `map_cores` object that is merged & used for simulating. You can set `drop_geom=TRUE` for this.
 
@@ -77,6 +77,6 @@ attr(kauai_ssd, "analysis_name") <- "HI_KAUAI_SSD_2020"
 # BELLA edited the below output names to account for each island unit; replaced "map" with island unit
 # Output the redist_map object. Do not edit this path.
 # TODO edited the below path to save separate maps for each of the basic island units
-write_rds(oahu_ssd, "data-out/HI_2020/HI_leg_2020_map_ssd_OAHU.rds", compress = "xz")
-write_rds(oahu_shd, "data-out/HI_2020/HI_leg_2020_map_shd_OAHU.rds", compress = "xz")
+write_rds(hawaii_ssd, "data-out/HI_2020/HI_leg_2020_map_ssd_HAWAII.rds", compress = "xz")
+write_rds(hawaii_shd, "data-out/HI_2020/HI_leg_2020_map_shd_HAWAII.rds", compress = "xz")
 cli_process_done()

@@ -21,13 +21,13 @@ set.seed(2020)
 
 # TODO set equal to one third of number of districts, increase by 10-15 if no convergence
 # BELLA edited for each basic island unit
-mh_accept_per_smc <- ceiling(n_distinct(oahu_shd$shd_2020)/3)
+mh_accept_per_smc <- ceiling(n_distinct(hawaii_shd$shd_2020)/3) + 3
 
 plans <- redist_smc(
   # BELLA edited for each island unit
-  oahu_shd,
+  hawaii_shd,
   nsims = 2000, runs = 5,
-  #constraints = constr,
+  constraints = constr,
   #ncores = 0,
   counties = pseudo_county,
   sampling_space = "linking_edge",
@@ -52,20 +52,20 @@ cli_process_start("Saving {.cls redist_plans} object")
 
 #TODO edited the below for each of the four island units
 # Output the redist_map object. Do not edit this path.
-write_rds(plans, here("data-out/HI_2020/HI_shd_2020_plans_OAHU.rds"), compress = "xz")
+write_rds(plans, here("data-out/HI_2020/HI_shd_2020_plans_HAWAII.rds"), compress = "xz")
 cli_process_done()
 
 # The following line is uncommented when viewing validation plots
-plans <- readRDS("data-out/HI_2020/HI_shd_2020_plans_OAHU.rds")
+#plans <- readRDS("data-out/HI_2020/HI_shd_2020_plans_OAHU.rds")
 
 # Compute summary statistics -----
 cli_process_start("Computing summary statistics for {.pkg HI_shd_2020}")
 
-plans <- add_summary_stats(plans, oahu_shd)
+plans <- add_summary_stats(plans, hawaii_shd)
 
 # TODO edited the below for each of the four basic island units
 # Output the summary statistics. Do not edit this path.
-save_summary_stats(plans, "data-out/HI_2020/HI_shd_2020_stats_OAHU.csv")
+save_summary_stats(plans, "data-out/HI_2020/HI_shd_2020_stats_HAWAII.csv")
 
 cli_process_done()
 
@@ -73,7 +73,7 @@ if (interactive()) {
     library(ggplot2)
     library(patchwork)
 
-    validate_analysis(plans, oahu_shd)
+    validate_analysis(plans, hawaii_shd)
     summary(plans)
 
     # Extra validation plots for custom constraints -----

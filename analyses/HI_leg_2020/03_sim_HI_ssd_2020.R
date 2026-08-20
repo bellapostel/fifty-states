@@ -21,11 +21,11 @@ set.seed(2020)
 
 # TODO set equal to one third of number of districts, increase by 10-15 if no convergence
 #BELLA edited per basic island unit
-mh_accept_per_smc <- ceiling(n_distinct(kauai_ssd$ssd_2020)/3)
+mh_accept_per_smc <- ceiling(n_distinct(hawaii_ssd$ssd_2020)/3)
 
 plans <- redist_smc(
-  kauai_ssd,
-  nsims = 4000, runs = 5,
+  hawaii_ssd,
+  nsims = 2000, runs = 5,
   counties = pseudo_county,
   sampling_space = "linking_edge",
   ms_params = list(frequency = 1L, mh_accept_per_smc = mh_accept_per_smc),
@@ -49,17 +49,17 @@ cli_process_start("Saving {.cls redist_plans} object")
 
 #TODO edited the below path so it saves for each of the four basic island units
 # Output the redist_map object. Do not edit this path.
-write_rds(plans, here("data-out/HI_2020/HI_ssd_2020_plans_KAUAI.rds"), compress = "xz")
+write_rds(plans, here("data-out/HI_2020/HI_ssd_2020_plans_HAWAII.rds"), compress = "xz")
 cli_process_done()
 
 # Compute summary statistics -----
 cli_process_start("Computing summary statistics for {.pkg HI_ssd_2020}")
 
-plans <- add_summary_stats(plans, kauai_ssd)
+plans <- add_summary_stats(plans, hawaii_ssd)
 
 # TODO edited the below path so it saves for each of the four basic island units
 # Output the summary statistics. Do not edit this path.
-save_summary_stats(plans, "data-out/HI_2020/HI_ssd_2020_stats_KAUAI.csv")
+save_summary_stats(plans, "data-out/HI_2020/HI_ssd_2020_stats_HAWAII.csv")
 
 cli_process_done()
 
@@ -67,7 +67,7 @@ if (interactive()) {
     library(ggplot2)
     library(patchwork)
 
-    validate_analysis(plans, kauai_ssd)
+    validate_analysis(plans, hawaii_ssd)
     summary(plans)
 
     # Extra validation plots for custom constraints -----
