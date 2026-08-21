@@ -192,7 +192,7 @@ if (!file.exists(here(shp_path))) {
    # hi_shp$adj <- hi_shp$adj %>% add_edge(islands$v1, islands$v2)
 
     library(geomander)
-#Removing beach connections
+#Removing beach connections from HAWAII (big island)
     hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4161, 4162)
     hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4162, 4163)
     hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4163, 4164)
