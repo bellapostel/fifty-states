@@ -85,9 +85,74 @@ if (!file.exists(here(shp_path))) {
 
   # Fixing state senate adjacency
   # District 005
-  library(geomander)
-  adj |>
-    add_edge(1853, 1857)
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 1853, 1857)
+  # District 001
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 1006, 1027)
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 1006, 1136)
+  #District 008
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 2142, 2169)
+# District 009
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 2572, 2578)
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 2572, 2863)
+  # District 011
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 3614, 3724)
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 3605, 3626)
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 2987, 3045)
+  #District 012
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 1428, 4142)
+  #District 013
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 690, 2261)
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 946, 967)
+  #District 015
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 2685, 2699)
+  #District 016
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 3006, 3035)
+  #District 017
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 6255, 9498)
+  #District 021
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 4963, 5128)
+  #District 030
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 6690, 6691)
+  #District 031
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 6564, 6720)
+  #District 037
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 6812, 6837)
+  #District 038
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 4241, 4267)
+  #District 039
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 3121, 4354)
+  #District 043
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 9484, 9782)
+  # District 046
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 8248, 8268)
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 9154, 9173)
+  il_shp$adj <- geomander::add_edge(il_shp$adj, 7358, 7382)
+
+  # Fixing state house adjacency
+  # District 003
+  # District 004
+  # District 005
+  # District 006
+  # District 015
+  # District 026
+  # District 032
+  # District 034
+  # District 050
+  # District 051
+  # District 052
+  # District 059
+  # District 060
+  # District 062
+  # District 067
+  # District 079
+  # District 080
+  # District 091
+  # District 095
+  # District 096
+  # District 098
+  # District 104
+  # District 112
+  # District 114
 
   # check max number of connected components
   # 1 is one fully connected component, more is worse
