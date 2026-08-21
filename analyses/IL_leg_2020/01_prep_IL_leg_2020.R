@@ -83,6 +83,12 @@ if (!file.exists(here(shp_path))) {
 
   # TODO any custom adjacency graph edits here
 
+  # Fixing state senate adjacency
+  # District 005
+  library(geomander)
+  adj |>
+    add_edge(1853, 1857)
+
   # check max number of connected components
   # 1 is one fully connected component, more is worse
   ccm(il_shp$adj, il_shp$ssd_2020)
