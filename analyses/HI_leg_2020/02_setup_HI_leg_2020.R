@@ -28,8 +28,8 @@ hawaii_shd <- map_shd |>
 # https://elections.hawaii.gov/wp-content/uploads/Meeting-Materials-20210826-v1.pdf
 
 hawaii_ssd <- map_ssd |>
-  filter(county == "Hawaii County") |>
-  #set_pop_tol(0.10) -- did not fix the stalling
+  filter(county == "Hawaii County")
+  #set_pop_tol(0.10)
 
 #OAHU
 oahu_shd <- map_shd |>

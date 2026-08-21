@@ -21,7 +21,7 @@ set.seed(2020)
 
 # TODO set equal to one third of number of districts, increase by 10-15 if no convergence
 #BELLA edited per basic island unit
-mh_accept_per_smc <- 0 #ceiling(n_distinct(hawaii_ssd$ssd_2020)/3)
+mh_accept_per_smc <- 1 #ceiling(n_distinct(hawaii_ssd$ssd_2020)/3)
 
 plans <- redist_smc(
   hawaii_ssd,
