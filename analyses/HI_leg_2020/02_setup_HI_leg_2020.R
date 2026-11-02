@@ -16,9 +16,15 @@ map_shd <- redist_map(hi_shp, pop_tol = 0.05,
 
 # TODO any filtering, cores, merging, etc.
 
+# Manually set population target for each map based on
+# https://elections.hawaii.gov/wp-content/uploads/2021-Reapportionment-Commission-Final-Report-952-pages-February-25-2022.pdf
+# The deviations I just manually calculated to be +-.05
+
 #HAWAII BIG ISLAND
 hawaii_shd <- map_shd |>
   filter(county == "Hawaii County")
+# Manually set pop target
+attr(hawaii_shd, 'pop_bounds') <- c(23749, 24999, 26249)
 
 # For HAWAII ssd, I changed pop_tol to 0.10 due to stalling out.
 # https://elections.hawaii.gov/wp-content/uploads/Addendum-01-Template-Plans.pdf?utm_source=chatgpt.com
@@ -29,43 +35,61 @@ hawaii_shd <- map_shd |>
 
 hawaii_ssd <- map_ssd |>
   filter(county == "Hawaii County")
-  #set_pop_tol(0.10)
+# Manually set pop target
+attr(hawaii_ssd, 'pop_bounds') <- c(47498, 49998, 52498)
 
 #OAHU
 oahu_shd <- map_shd |>
-  filter(county == "Honolulu County")
+  filter(county == "Honolulu County") |>
+  set_pop_tol(0.05)
+# Manually set pop target
+attr(oahu_shd, 'pop_bounds') <- c(25441, 26780, 28119)
 
 oahu_ssd <- map_ssd |>
   filter(county == "Honolulu County")
+# Manually set pop target
+attr(oahu_ssd, 'pop_bounds') <- c(50882, 53560, 56238)
 
 #MAUI
 maui_shd <- map_shd |>
   filter(county == "Maui County" | county == "Kalawao County")
+# Manually set pop target
+attr(maui_shd, 'pop_bounds') <- c(26052, 27423, 28794)
 
 maui_ssd <- map_ssd |>
   filter(county == "Maui County" | county == "Kalawao County")
+# Manually set pop target
+attr(maui_ssd, 'pop_bounds') <- c(52104, 54846, 57588)
 
 #KAUAI
 kauai_shd <- map_shd |>
   filter(county == "Kauai County")
+# Manually set pop target
+attr(kauai_shd, 'pop_bounds') <- c(23118, 24335, 25552)
 
 kauai_ssd <- map_ssd |>
   filter(county == "Kauai County")
+# Manually set pop target
+attr(kauai_ssd, 'pop_bounds') <- c(69354, 73004, 76654)
 
 # Added the following Polsby-Popper constraint
 constr <- redist_constr(hawaii_shd)
 constr <- add_constr_polsby(constr, strength = 10, perim_df = NULL)
 
+# Added the following Polsby-Popper constraint
+#constr <- redist_constr(oahu_shd)
+#constr <- add_constr_polsby(constr, strength = 1, perim_df = NULL)
+
 # TODO remove if not necessary. Adjust pop_muni as needed to balance county/muni splits
 # make pseudo counties with default settings
 # BELLA EDITED TO ACCOUNT FOR SUB MAPS; replaced "map" with name of island unit
 # CHANGE for each island unit
-oahu_ssd <- oahu_ssd |>
-    mutate(pseudo_county = pick_county_muni(oahu_ssd, counties = county, munis = muni,
-                                            pop_muni = get_target(oahu_ssd)))
-oahu_shd <- oahu_shd |>
-    mutate(pseudo_county = pick_county_muni(oahu_shd, counties = county, munis = muni,
-                                            pop_muni = get_target(oahu_shd)))
+hawaii_ssd <- hawaii_ssd |>
+    mutate(pseudo_county = pick_county_muni(hawaii_ssd, counties = county, munis = muni,
+                                            pop_muni = get_target(hawaii_ssd)))
+hawaii_shd <- hawaii_shd |>
+    mutate(pseudo_county = pick_county_muni(hawaii_shd, counties = county, munis = muni,
+                                            pop_muni = get_target(hawaii_shd)))
 # IF MERGING CORES OR OTHER UNITS:
 # make a new `map_cores` object that is merged & used for simulating. You can set `drop_geom=TRUE` for this.
 
@@ -85,9 +109,6 @@ attr(kauai_ssd, "analysis_name") <- "HI_KAUAI_SSD_2020"
 # BELLA edited the below output names to account for each island unit; replaced "map" with island unit
 # Output the redist_map object. Do not edit this path.
 # TODO edited the below path to save separate maps for each of the basic island units
-write_rds(oahu_ssd, "data-out/HI_2020/HI_leg_2020_map_ssd_OAHU.rds", compress = "xz")
-write_rds(oahu_shd, "data-out/HI_2020/HI_leg_2020_map_shd_OAHU.rds", compress = "xz")
+write_rds(hawaii_ssd, "data-out/HI_2020/HI_leg_2020_map_ssd_HAWAII.rds", compress = "xz")
+write_rds(hawaii_shd, "data-out/HI_2020/HI_leg_2020_map_shd_HAWAII.rds", compress = "xz")
 cli_process_done()
-
-# Plan parity
-plan_parity(oahu_shd, .data = pl(shd_2020))

@@ -214,6 +214,8 @@ if (!file.exists(here(shp_path))) {
     hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4159, 4160)
     hi_shp$adj <- geomander::subtract_edge(hi_shp$adj, 4160, 4161)
 
+    # Removing beach connections in Oahu
+
 
     # check max number of connected components
     # 1 is one fully connected component, more is worse
@@ -246,3 +248,4 @@ if (!file.exists(here(shp_path))) {
 #print(n_distinct(hi_shp$county))
 # listed counties; Kalawao is a part of Molokai, according to https://www.oha.org/wp-content/uploads/RPT_Kalawao-County.pdf
 #print(distinct(hi_shp, county))
+
