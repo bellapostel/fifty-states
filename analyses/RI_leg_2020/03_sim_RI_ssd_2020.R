@@ -25,6 +25,7 @@ mh_accept_per_smc <- ceiling(n_distinct(map_ssd$ssd_2020)/3)
 plans <- redist_smc(
   map_ssd,
   nsims = 2e3, runs = 5,
+  constraints = constr,
   counties = pseudo_county,
   sampling_space = "linking_edge",
   ms_params = list(frequency = 1L, mh_accept_per_smc = mh_accept_per_smc),

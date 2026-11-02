@@ -13,6 +13,9 @@ map_shd <- redist_map(ri_shp, pop_tol = 0.05,
     existing_plan = shd_2020, adj = ri_shp$adj)
 
 # TODO any filtering, cores, merging, etc.
+# Add total splits constraint
+constr <- redist_constr(map_ssd) |>
+  add_constr_splits(strength = 2, admin = map_ssd$muni)
 
 # TODO remove if not necessary. Adjust pop_muni as needed to balance county/muni splits
 # make pseudo counties with default settings
